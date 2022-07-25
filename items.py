@@ -1,18 +1,17 @@
-from shapes import Rectangle, Circle
-from configs import images
+from shapes import Rectangle, Circle, BaseShape
+from config import images
 
 
 class Ingredient(Rectangle):
-    def __init__(self, type_, level, x, y, slot=None, **kwargs):
-        super(Ingredient, self).__init__(x, y, w=70, h=70)
-        self.type = type_
+    def __init__(self, type, level, x, y, slot=None, **kwargs):
+        super(Ingredient, self).__init__(x, y, w=70, h=70, **kwargs)
+        self.type = type
         self.level = level
         self.slot = slot    
-        self.image_path = images[type_.lower()]
+        self.image_path = images[type.lower()]
         
     def draw(self):
         super(Ingredient, self).draw(CENTER)
-        fill(255)
         img = loadImage(self.image_path)
         imageMode(CENTER)
         image(img, self.x, self.y, self.w, self.h)
@@ -32,10 +31,7 @@ class Ingredient(Rectangle):
         circle_distance_y = abs(slot.y - self.y)
         if circle_distance_x > self.w / 2 + slot.r or circle_distance_y > self.h / 2 + slot.r:
             return False
-            return False
-        if circle_distance_x <= self.w / 2:
-            return True
-        if circle_distance_y <= self.h / 2:
+        if circle_distance_x <= self.w / 2 or circle_distance_y <= self.h / 2:
             return True
         corner_distance_sq = (circle_distance_x - self.w / 2) ** 2 + (circle_distance_y - self.h / 2) ** 2
         return corner_distance_sq <= (slot.r ** 2)
@@ -45,8 +41,9 @@ class Ingredient(Rectangle):
 
 
 class Slot(Circle):
-    def __init__(self, x, y, r=80, **kwargs):
-        super(Slot, self).__init__(x, y, r, **kwargs)
+    def __init__(self, x, y, r=65, **kwargs):
+        super(Slot, self).__init__(x, y, r)
+        self.kwargs
     
     def __repr__(self):
         return 'Slot {}'.format(id(self))
@@ -55,7 +52,46 @@ class Slot(Circle):
 class Inventory(Rectangle):
     def __init__(self, x, y, w, h, **kwargs):
         super(Inventory, self).__init__(x, y, w, h, **kwargs)
+        self.slots = []
+        
+        
+
+class Text(BaseShape):
+    def __init__(self, x, y, w, h, text, text_size, **kwargs):
+        super(Text, self).__init__(x, y, w, h, **kwargs)
+        self.text = text
+        self.text_size = text_size
+        self.kwargs
+        
+    def draw(self):
+        super(Text, self).draw()
+        textSize(self.text_size)
+        textAlign(CENTER)
+        text(self.text, self.x, self.y, self.w, self.h)
+        
+        
+class Button(Rectangle):
+    def __init__(self, x, y, w, h, text, action, **kwargs):
+        super(Button, self).__init__(x, y, w, h, 20, **kwargs)
+        self.text = text
+        self.action = action
+        self.color = '#7785a4'
+        self.active_color = '#ff0400'
+        
+    def draw(self):
+        super(Button, self).draw(CENTER)
+        textSize(24)
+        fill(0)
+        rectMode(CENTER)
+        textAlign(CENTER, CENTER)
+        text(self.text, self.x, self.y - 2)
+        rectMode(CORNER)
+        
+        
+    def run(self, *args, **kwargs):
+        self.action(*args, **kwargs)
         
     
+        
 
-    
+        

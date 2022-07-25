@@ -1,19 +1,18 @@
 from objects import ELEMENTS_FOR_RENDER, INGREDIENTS, SLOTS
 from items import Ingredient
+from objects import crafting_button
 import config
+from tools import group_ingredients
 
 hold = None
 blocked = False
 
 
-
-    
-
 def setup():
     size(config.screen_w, config.screen_h)
     # rectMode(CENTER)
     strokeWeight(5)
-    # frameRate(30)
+    # frameRate(100)
     
     
 def draw():
@@ -29,8 +28,6 @@ def draw():
                 element.slot = slot
                 element.move_to_slot()
 
-    
-
     if hold:
         hold.x = mouseX
         hold.y = mouseY
@@ -38,6 +35,10 @@ def draw():
         
 def mousePressed():
     global hold, blocked
+    if crafting_button.cur_collision(mouseX, mouseY):
+        crafting_button.run()
+    
+    
     if blocked:
         return
     for ingredient in INGREDIENTS:
@@ -50,3 +51,7 @@ def mouseReleased():
     global blocked, hold
     hold = None
     blocked = False
+
+    
+    
+    
