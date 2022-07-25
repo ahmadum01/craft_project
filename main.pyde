@@ -3,6 +3,7 @@ from items import Ingredient
 from objects import crafting_button
 import config
 from tools import group_ingredients
+from helpers import check_
 
 hold = None
 blocked = False
@@ -28,6 +29,10 @@ def draw():
                 element.slot = slot
                 element.move_to_slot()
 
+            elif not check_(element):
+                element.move_to_back()
+                    
+
     if hold:
         hold.x = mouseX
         hold.y = mouseY
@@ -35,9 +40,9 @@ def draw():
         
 def mousePressed():
     global hold, blocked
+    
     if crafting_button.cur_collision(mouseX, mouseY):
         crafting_button.run()
-    
     
     if blocked:
         return
@@ -48,6 +53,7 @@ def mousePressed():
 
 
 def mouseReleased():
+
     global blocked, hold
     hold = None
     blocked = False

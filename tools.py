@@ -13,4 +13,6 @@ def rel_y(percent):
 def group_ingredients(ingredients):
     result = sorted(ingredients, key=lambda a: (a[0], a[1]))
     return [list(b) for a, b in groupby(result, lambda a: (a[0], a[1]))]
+
+
     

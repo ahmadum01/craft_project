@@ -9,6 +9,7 @@ class Ingredient(Rectangle):
         self.level = level
         self.slot = slot    
         self.image_path = images[type.lower()]
+        self.default = {'x': x, 'y': y}
         
     def draw(self):
         super(Ingredient, self).draw(CENTER)
@@ -25,6 +26,11 @@ class Ingredient(Rectangle):
     def move_to_slot(self):
         self.x = self.slot.x
         self.y = self.slot.y
+    
+    def move_to_back(self):
+        self.x = self.default['x']
+        self.y = self.default['y']
+    
     
     def intersects(self, slot):
         circle_distance_x = abs(slot.x - self.x)
