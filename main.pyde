@@ -3,7 +3,7 @@ from items import Ingredient
 from objects import crafting_button
 import config
 from tools import group_ingredients
-from helpers import check_
+from helpers import check_move_to_back
 
 hold = None
 blocked = False
