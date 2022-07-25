@@ -29,7 +29,7 @@ def draw():
                 element.slot = slot
                 element.move_to_slot()
 
-            elif not check_(element):
+            elif not check_move_to_back(element):
                 element.move_to_back()
                     
 
