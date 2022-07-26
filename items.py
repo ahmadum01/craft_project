@@ -12,11 +12,12 @@ class Ingredient(Rectangle):
         self.default = {'x': x, 'y': y}
         
     def draw(self):
+        fill(0)
         super(Ingredient, self).draw(CENTER)
         img = loadImage(self.image_path)
         imageMode(CENTER)
-        image(img, self.x, self.y, self.w, self.h, self.r)
-        fill(0)
+        image(img, self.x, self.y, self.w, self.h,)
+        
         textSize(24)
         rectMode(CENTER)
         textAlign(CENTER)

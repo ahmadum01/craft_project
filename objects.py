@@ -89,7 +89,7 @@ for i, group in enumerate(group_ingredients(ingredients)):
                            level=ing[1],
                            x=100,
                            y=150 + i * 100,
-                           r=40,
+                           r=60,
                     )
         INGREDIENTS.append(ingredient)
 
