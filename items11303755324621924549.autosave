@@ -63,6 +63,7 @@ class Inventory(Rectangle):
         self.slots = []
         
         
+
 class Text(BaseShape):
     def __init__(self, x, y, w, h, text, text_size, **kwargs):
         super(Text, self).__init__(x, y, w, h, **kwargs)
@@ -82,12 +83,10 @@ class Button(Rectangle):
         super(Button, self).__init__(x, y, w, h, **kwargs)
         self.text = text
         self.action = action
-        self.default_color = '#7785a4'
-        self.pressed_color = '#ff0400'
-        self.current_color = self.default_color
+        self.color = '#7785a4'
+        self.active_color = '#ff0400'
         
     def draw(self):
-        fill(self.current_color)
         super(Button, self).draw(CENTER)
         textSize(24)
         fill(0)
@@ -95,13 +94,12 @@ class Button(Rectangle):
         textAlign(CENTER, CENTER)
         text(self.text, self.x, self.y - 2)
         rectMode(CORNER)
-
-    def set_pressed_color(self):
-        self.current_color = self.pressed_color
-    
-    def set_default_color(self):
-        self.current_color = self.default_color
+        
         
     def run(self, *args, **kwargs):
         self.action(*args, **kwargs)
-            
+        
+        
+        
+
+        
