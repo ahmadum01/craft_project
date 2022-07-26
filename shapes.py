@@ -26,8 +26,10 @@ class Rectangle(BaseShape):
         super(Rectangle, self).draw()
         if center == CENTER:
             rectMode(CENTER)
-    
+        strokeWeight(2)
+        stroke(64, 45, 255)
         rect(self.x, self.y, self.w, self.h, self.r)
+        
         rectMode(CORNER)
 
 

@@ -3,7 +3,7 @@ from items import Ingredient
 from objects import crafting_button
 import config
 from tools import group_ingredients
-from helpers import check_move_to_back
+from helpers import check_move_to_back, check_affiliation_ingredient
 
 hold = None
 blocked = False
@@ -25,13 +25,23 @@ def draw():
         if element not in INGREDIENTS:
             continue
         for slot in SLOTS:
-            if isinstance(element, Ingredient) and element.intersects(slot):
-                element.slot = slot
-                element.move_to_slot()
-
-            elif not check_move_to_back(element):
-                element.move_to_back()
+            if isinstance(element, Ingredient):
+                
+                if element.intersects(slot) and not check_affiliation_ingredient(element, slot):
+                    element.move_to_back()
+                
+                elif element.intersects(slot):
+                    element.slot = slot
+                    if element not in slot.items:
+                        slot.items.append(element)
+                    element.move_to_slot()
                     
+                elif not check_move_to_back(element):
+                    element.move_to_back()
+                    try:
+                        slot.items.remove(element)
+                    except:
+                        pass
 
     if hold:
         hold.x = mouseX

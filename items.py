@@ -50,6 +50,7 @@ class Ingredient(Rectangle):
 class Slot(Circle):
     def __init__(self, x, y, r=65, **kwargs):
         super(Slot, self).__init__(x, y, r)
+        self.items = []
         self.kwargs
     
     def __repr__(self):
@@ -62,7 +63,6 @@ class Inventory(Rectangle):
         self.slots = []
         
         
-
 class Text(BaseShape):
     def __init__(self, x, y, w, h, text, text_size, **kwargs):
         super(Text, self).__init__(x, y, w, h, **kwargs)
@@ -93,12 +93,9 @@ class Button(Rectangle):
         textAlign(CENTER, CENTER)
         text(self.text, self.x, self.y - 2)
         rectMode(CORNER)
+
         
         
     def run(self, *args, **kwargs):
         self.action(*args, **kwargs)
-        
-    
-        
-
-        
+            
