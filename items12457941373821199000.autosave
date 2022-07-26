@@ -9,15 +9,13 @@ class Ingredient(Rectangle):
         self.level = level
         self.slot = slot    
         self.image_path = images[type.lower()]
-        self.default = {'x': x, 'y': y}
         
     def draw(self):
-        fill(0)
         super(Ingredient, self).draw(CENTER)
         img = loadImage(self.image_path)
         imageMode(CENTER)
-        image(img, self.x, self.y, self.w, self.h,)
-        
+        image(img, self.x, self.y, self.w, self.h)
+        fill(0)
         textSize(24)
         rectMode(CENTER)
         textAlign(CENTER)
@@ -27,11 +25,6 @@ class Ingredient(Rectangle):
     def move_to_slot(self):
         self.x = self.slot.x
         self.y = self.slot.y
-    
-    def move_to_back(self):
-        self.x = self.default['x']
-        self.y = self.default['y']
-    
     
     def intersects(self, slot):
         circle_distance_x = abs(slot.x - self.x)
@@ -79,7 +72,7 @@ class Text(BaseShape):
         
 class Button(Rectangle):
     def __init__(self, x, y, w, h, text, action, **kwargs):
-        super(Button, self).__init__(x, y, w, h, **kwargs)
+        super(Button, self).__init__(x, y, w, h, 20, **kwargs)
         self.text = text
         self.action = action
         self.color = '#7785a4'

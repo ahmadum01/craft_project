@@ -12,9 +12,9 @@ class BaseShape(object):
 
 
 class Rectangle(BaseShape):
-    def __init__(self, x, y, w, h, *args, **kwargs):
+    def __init__(self, x, y, w, h, r=0, **kwargs):
         super(Rectangle, self).__init__(x, y, w, h, **kwargs)
-        self.args = args
+        self.r = r
         self.kwargs = kwargs
     
     def cur_collision(self, cur_x, cur_y):
@@ -26,7 +26,8 @@ class Rectangle(BaseShape):
         super(Rectangle, self).draw()
         if center == CENTER:
             rectMode(CENTER)
-        rect(self.x, self.y, self.w, self.h, *self.args)
+    
+        rect(self.x, self.y, self.w, self.h, self.r)
         rectMode(CORNER)
 
 
