@@ -18,6 +18,7 @@ inventory = Inventory(
     w=rel_x(23),
     h=rel_y(85),
     fill=255,
+    r=20,
 )
 
 crafting_frame = Rectangle(
@@ -25,6 +26,7 @@ crafting_frame = Rectangle(
     y=inventory.y,
     w=rel_x(70),
     h=inventory.h,
+    r=20,
 )
 a = 0
 def hello():
@@ -38,7 +40,8 @@ crafting_button = Button(
     w=100, 
     h=40,
     text="Craft",
-    action=hello
+    action=hello,
+    r=20,
 )
 
 result_slot = Slot(
@@ -85,7 +88,8 @@ for i, group in enumerate(group_ingredients(ingredients)):
                            type=ing[0],
                            level=ing[1],
                            x=100,
-                           y=150 + i * 100
+                           y=150 + i * 100,
+                           r=40,
                     )
         INGREDIENTS.append(ingredient)
 
